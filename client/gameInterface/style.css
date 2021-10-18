@@ -1,0 +1,14 @@
+.game-wrapper {
+    width: 100%;
+ }
+
+.game-menu {
+    width: 495px;
+    margin: auto;
+}
+
+canvas {
+    padding: 0;
+    margin: 20px auto auto auto;
+    display: block;
+}
