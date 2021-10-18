@@ -9,5 +9,5 @@ multiplayer game and chat for collecting data on human counterfactual explanatio
 
 
 # database setup
-* install mongodb using npm install mongodb
+* install mongodb using <code>npm install mongodb</code>
 * important: comment the database code if you are running the code locally
