@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Minigrid Web Chat</title>
+      <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="gameInterface/style.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-6">
+        <!-- Chat Window -->
+        <div id="tiny-chat">
+            <h2>Minigrid Chat</h2>
+            <div id="tiny-window">
+                <ul id="events"></ul>
+                <div id="output"></div>
+                <div id="feedback"></div>
+            </div>
+            <div id="info"></div>
+            <div class="button-wrapper">
+                <button id="because" class="turn">Because</button>
+                <button id="instead" class="turn">Instead</button>
+                <button id="better" class="turn">Better</button>
+                <button id="worse" class="turn">Worse</button>
+            </div>
+
+            <form id="form" action="">
+                <ul id="messages"></ul>
+                <div id="handle"></div>
+                <input id="message" autocomplete="off" placeholder="Hint: Try and frame your message using one of these prompts"  />
+                <button id='send'>Send</button>
+            </form>
+        </div><!--tiny-chat-->
+        <!-- Chat Window -->
+    </div><!--column-->
+    <div class="col-lg-6">
+        <!-- Game -->
+    <div class="game-wrapper">
+        <div class="game-menu">
+
+          <div class="button-wrapper">
+
+            <button id="button-join-as-player">Join as Learner</button>
+            <button id="button-join-as-observer">Join as Teacher</button>
+            <button id="button-new-game">New game</button>
+
+          </div>
+        </div>
+        <div class="game-canvas-container" id="game-canvas-container">
+            <!-- Game HTML gets injected here -->
+        </div>
+    </div>
+    <!-- Game -->
+
+    </div><!--column-->
+  </div> <!--row-->
+</div><!--container-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="chat/main.js"></script>
+  </body>
+</html>
