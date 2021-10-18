@@ -4,8 +4,7 @@ import express from 'express'
 import * as fs from 'fs'
 import { Server } from 'socket.io'
 import { logEvent } from './event_logger/index.js'
-import mongoose from 'mongoose'
-// const fs = require('fs');
+// import mongoose from 'mongoose' // Remove comment if you have an online database
 
 const app = express();
 

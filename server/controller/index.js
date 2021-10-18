@@ -83,15 +83,15 @@ export class Controller {
     }
 
     #startGameTimer = () => {
-        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*100)
+        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*200)
     }
 
     emitGameState = () => {
        this.emitEvent('gameState', this.game.getState())
        logEvent(
             'states',
-            (this.game.getState().board))
-            //JSONArray(this.game.getState()))
+            //(this.game.getState().board))
+            (this.game.getState()))
         }
 
     onKeyStroke = (keyCode, userId) => {
@@ -160,6 +160,7 @@ export class Controller {
                 id: userId,
             }
             this.#sendMessageAsServer('A learner has joined the game')
+            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask "why" if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
         }
         else if (command === 'joinAsObserver'
                 && this.teacher === null
@@ -168,7 +169,7 @@ export class Controller {
                 id: userId
             }
             this.#sendMessageAsServer('A teacher has joined the game')
-            this.#sendMessageAsServer('INFO:', userId)
+            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Plan ahead to provide informative explanations on how to achieve the mission in the minimum number of steps. You can click on the words "because" "instead" "better" and "worse" to add them in your explanations and compare the outcomes of two possible actions in the game. Now it\'s time to play! Click on "New Game" and have fun! ', userId)
         }
         else if (command === 'newGame') {
             this.onNewGameCommand()
