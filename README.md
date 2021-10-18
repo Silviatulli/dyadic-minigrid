@@ -1,5 +1,5 @@
 # dyadic-minigrid
-multiplayer game and chat for collecting data on human counterfactual explanations in a collaborative learning task
+multiplayer game and chat for collecting data on human counterfactual explanations in a collaborative learning task.
 
 # environment setup
 * clone the repository with <code>git glone</code>
