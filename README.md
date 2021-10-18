@@ -6,6 +6,7 @@ multiplayer game and chat for collecting data on human counterfactual explanatio
 * initialize the folder with <code>npm init -y</code>
 * install express and socket.io with <code>npm install express socket.io</code>
 * install nodemon with <code>npm install nodemon --save-dev</code>
+* modify the package.json by adding in scripts <code>"start": "node server.js", "dev": "nodemon server.js"</code> before <code>"test"</code>
 
 
 # database setup
