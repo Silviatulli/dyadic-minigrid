@@ -2,10 +2,10 @@
 multiplayer game and chat for collecting data on human counterfactual explanations in a collaborative learning task
 
 # environment setup
-* clone the repository with git glone
-* initialize the folder with npm init -y
-* install express and socket.io with npm install express socket.io
-* install nodemon with npm install nodemon --save-dev
+* clone the repository with <code>git glone</code>
+* initialize the folder with <code>npm init -y</code>
+* install express and socket.io with <code>npm install express socket.io</code>
+* install nodemon with <code>npm install nodemon --save-dev</code>
 
 
 # database setup
