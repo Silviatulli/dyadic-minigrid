@@ -13,7 +13,7 @@ multiplayer game and chat for collecting data on human counterfactual explanatio
 * set the start and dev scripts by adding <code>"start": "node server.js", "dev": "nodemon server.js"</code> before <code>"test"</code>
 
 
-# database setup
+## database setup
 * install mongodb using <code>npm install mongodb</code>
 * install mongoose using <code>pip install mongoose</code>
 * important: comment the database code if you are running the code locally
