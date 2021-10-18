@@ -12,5 +12,5 @@ multiplayer game and chat for collecting data on human counterfactual explanatio
 
 # database setup
 * install mongodb using <code>npm install mongodb</code>
-* install mongoose using <code>npm install mongoose</code>
+* install mongoose using <code>pip install mongoose</code>
 * important: comment the database code if you are running the code locally
