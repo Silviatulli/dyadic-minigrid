@@ -4,7 +4,6 @@ class Templates {
     this._players = [p1, p2];
     this._turns = [null, null];
 
-    this._sendToPlayers('Both players are connected! Let\'s Starts!');
 
     this._players.forEach((player) => {
       player.on('turn', (turn, msg) => {

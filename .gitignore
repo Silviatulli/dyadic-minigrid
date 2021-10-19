@@ -1,0 +1,8 @@
+server/node_modules/*
+.idea
+server/.idea
+client/.idea
+server/package-lock.json
+client/actions.csv
+client/states.csv
+client/explanations.csv

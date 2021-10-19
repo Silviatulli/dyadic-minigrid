@@ -91,7 +91,7 @@ export class Controller {
        logEvent(
             'states',
             //(this.game.getState().board))
-            (this.game.getState()))
+            JSON.stringify(this.game.getState()))
         }
 
     onKeyStroke = (keyCode, userId) => {

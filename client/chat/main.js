@@ -24,13 +24,12 @@ export const initChat = (sock) => {
         sock.emit('chat', {
             message: message.value
         });
-
-        ['because', 'instead', 'better', 'worse'].forEach((id) => {
-        const button = document.getElementById(id);
-        button.addEventListener('click', () => {
-            message.value = "" + " " + id;
+        ['why','because', 'instead', 'better', 'worse'].forEach((id) => {
+            const button = document.getElementById(id);
+            button.addEventListener('click', () => {
+                message.value = "" + " " + id;
+                });
             });
-        });
     form.reset();
     });
 

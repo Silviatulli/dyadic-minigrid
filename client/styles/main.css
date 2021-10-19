@@ -1,5 +1,6 @@
 body {
   font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1.7em;
   margin: 0;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -10,7 +11,8 @@ body {
 
 button {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 0.8rem;
+  font-weight: bold;
+  font-size: 1rem;
   padding: 3px 15px;
   color: white;
   line-height: 25px;
@@ -28,7 +30,7 @@ button:hover {
 }
 
 button.turn {
-  color: rgb(255, 64, 129);
+  color: rgb(12, 171, 144);
   background-color: white;
   box-shadow:none;
 }
@@ -136,7 +138,7 @@ h2 {
 }
 
 #output strong {
-    color: #575ed8;
+    color: #0cab90;
 }
 
 label {
@@ -153,7 +155,7 @@ input {
     display: block;
     width: 100%;
     background: #fff;
-    border-bottom: 1px solid #e63636;
+    border-bottom: 1px solid #03453a;
     font-family: 'Source Sans Pro';
     font-size: 16px;
 }

@@ -6,7 +6,7 @@
       <link rel="stylesheet" href="gameInterface/style.css">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   </head>
   <body>
 
@@ -23,6 +23,7 @@
             </div>
             <div id="info"></div>
             <div class="button-wrapper">
+                <button id="why" class="turn">Why</button>
                 <button id="because" class="turn">Because</button>
                 <button id="instead" class="turn">Instead</button>
                 <button id="better" class="turn">Better</button>
@@ -32,7 +33,7 @@
             <form id="form" action="">
                 <ul id="messages"></ul>
                 <div id="handle"></div>
-                <input id="message" autocomplete="off" placeholder="Hint: Try and frame your message using one of these prompts"  />
+                <input id="message" autocomplete="off" placeholder="Hint: Try and frame your message using one of the prompts above"  />
                 <button id='send'>Send</button>
             </form>
         </div><!--tiny-chat-->
@@ -51,8 +52,15 @@
 
           </div>
         </div>
+
         <div class="game-canvas-container" id="game-canvas-container">
             <!-- Game HTML gets injected here -->
+        </div>
+        <div id="tiny-chat">
+                <form id="prolificform" action="">
+                <input id="prolificid" autocomplete="off" placeholder="Prolific ID"  />
+                <button id='send'>Send</button>
+                </form>
         </div>
     </div>
     <!-- Game -->
