@@ -7,10 +7,12 @@ export class Controller {
     learner = null
     teacher = null
     gameTimerId = null
+    gamesCounter = 1
 
     constructor(emitEvent) {
         this.emitEvent = emitEvent
     }
+
 
     onChatMessage = (userId, message) => {
         console.log('onChatMessage', userId, message)
@@ -64,15 +66,19 @@ export class Controller {
         this.game = new Game({
             onGameScoreChanged: this.onGameScoreChanged
         })
+        this.gamesCounter++
+        console.log(this.gamesCounter)
         this.emitGameState()
-        this.#sendMessageAsServer('A new game has started!')
         this.#clearGameTimer()
         this.#startGameTimer()
     }
 
+
     onGameTimeout = () => {
-        this.#sendMessageAsServer('Timeout reached! The game is over.')
-        this.newGame()
+            if(this.gamesCounter <= 2){
+            this.#sendMessageAsServer('Timeout reached! The game is over.')
+            this.newGame()
+            }
     }
 
     #clearGameTimer = () => {
@@ -83,7 +89,7 @@ export class Controller {
     }
 
     #startGameTimer = () => {
-        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*200)
+        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*10)
     }
 
     emitGameState = () => {
@@ -138,18 +144,23 @@ export class Controller {
         let canStart = true
         if (this.learner === null) {
             canStart = false
-            this.#sendMessageAsServer('The game cannot start without a player')
+            this.#sendMessageAsServer('The game cannot start without a learner')
         }
         if (this.teacher === null) {
             canStart = false
             this.#sendMessageAsServer('The game cannot start without a teacher')
         }
         if (canStart) {
+           if(this.gamesCounter<=2){
             this.newGame()
-        }
+            this.#sendMessageAsServer('A new game has started!')
+            }
+           }
+         }
+
+    endGameLink = (userId) => {
+     this.#sendMessageAsServer('please '+ this.#getHandle(userId) +' follow this link', userId)
     }
-
-
 
     onMenuCommand = (command, userId) => {
         console.log('onMenuCommand', command, userId)
@@ -159,6 +170,7 @@ export class Controller {
             this.learner = {
                 id: userId,
             }
+            this.gamesCounter = 0
             this.#sendMessageAsServer('A learner has joined the game')
             this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask "why" if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
         }
@@ -168,11 +180,15 @@ export class Controller {
             this.teacher = {
                 id: userId
             }
+            this.gamesCounter = 0
             this.#sendMessageAsServer('A teacher has joined the game')
             this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Plan ahead to provide informative explanations on how to achieve the mission in the minimum number of steps. You can click on the words "because" "instead" "better" and "worse" to add them in your explanations and compare the outcomes of two possible actions in the game. Now it\'s time to play! Click on "New Game" and have fun! ', userId)
         }
         else if (command === 'newGame') {
             this.onNewGameCommand()
+            if(this.gamesCounter === 3){
+                this.endGameLink(userId)
+            }
         }
     }
 

@@ -24,6 +24,7 @@ const onNewGameClicked = (socket) => {
     socket.emit('onMenuCommand', 'newGame')
 }
 
+
 const listenToGameMenuClicks = (socket) => {
     const joinAsPlayerButton = document.getElementById('button-join-as-player')
     joinAsPlayerButton.onclick = () => onJoinAsPlayerClicked(socket)
