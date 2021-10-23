@@ -7,7 +7,7 @@ export class Controller {
     learner = null
     teacher = null
     gameTimerId = null
-    gamesCounter = 1
+    gamesCounter = 0
 
     constructor(emitEvent) {
         this.emitEvent = emitEvent
@@ -64,7 +64,8 @@ export class Controller {
 
     newGame = () => {
         this.game = new Game({
-            onGameScoreChanged: this.onGameScoreChanged
+            onGameScoreChanged: this.onGameScoreChanged,
+            scenarioIndex: this.gamesCounter
         })
         this.gamesCounter++
         console.log(this.gamesCounter)
@@ -75,10 +76,14 @@ export class Controller {
 
 
     onGameTimeout = () => {
-            if(this.gamesCounter <= 2){
             this.#sendMessageAsServer('Timeout reached! The game is over.')
+            if(this.gamesCounter <= 2){
             this.newGame()
             }
+            else {
+             this.endGame()
+            }
+
     }
 
     #clearGameTimer = () => {
@@ -89,7 +94,7 @@ export class Controller {
     }
 
     #startGameTimer = () => {
-        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*10)
+        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*5)
     }
 
     emitGameState = () => {
@@ -152,14 +157,21 @@ export class Controller {
         }
         if (canStart) {
            if(this.gamesCounter<=2){
-            this.newGame()
-            this.#sendMessageAsServer('A new game has started!')
+                this.newGame()
+                this.#sendMessageAsServer('A new game has started!')
             }
            }
          }
 
-    endGameLink = (userId) => {
-     this.#sendMessageAsServer('please '+ this.#getHandle(userId) +' follow this link', userId)
+    endGame = () => {
+        this.emitEvent('gameEnded', {})
+        this.#sendMessageAsServer('please learner follow this link: https://forms.gle/dmoYD35xbhTHiiyD7', this.learner.id)
+        this.#sendMessageAsServer('please teacher follow this link: https://forms.gle/Wueor5rEaCWcxrhw5', this.teacher.id)
+     /*if(this.#getHandle(userId) == 'learner'){
+        this.#sendMessageAsServer('please '+ this.#getHandle(userId) +' follow this link: https://forms.gle/dmoYD35xbhTHiiyD7', userId)
+     } else if(this.#getHandle(userId) == 'teacher'){
+        this.#sendMessageAsServer('please '+ this.#getHandle(userId) +' follow this link: https://forms.gle/Wueor5rEaCWcxrhw5', userId)
+     }*/
     }
 
     onMenuCommand = (command, userId) => {
@@ -185,9 +197,11 @@ export class Controller {
             this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Plan ahead to provide informative explanations on how to achieve the mission in the minimum number of steps. You can click on the words "because" "instead" "better" and "worse" to add them in your explanations and compare the outcomes of two possible actions in the game. Now it\'s time to play! Click on "New Game" and have fun! ', userId)
         }
         else if (command === 'newGame') {
-            this.onNewGameCommand()
-            if(this.gamesCounter === 3){
-                this.endGameLink(userId)
+            if(this.gamesCounter<=2){
+                this.onNewGameCommand()
+            }
+            else {
+                this.endGame()
             }
         }
     }

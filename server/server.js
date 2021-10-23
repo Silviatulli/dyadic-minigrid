@@ -19,12 +19,14 @@ const io = new Server(server);
 let controller = null
 
 const emitEvent = (name, body, to) => {
+    console.log('emitEvent', name)
     if (to === undefined || to === null) {
         io.emit(name, body)
     }
     else {
         console.log('XXX')
         io.to(to).emit(name, body)
+
     }
 }
 

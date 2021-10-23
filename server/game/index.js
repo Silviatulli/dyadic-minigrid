@@ -10,7 +10,7 @@ import {
 
 export class Game {
 
-    constructor({onGameScoreChanged}) {
+    constructor({onGameScoreChanged, scenarioIndex}) {
         const scenarioOneRawData = [
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             [1,2,0,0,0,0,0,8,0,0,1,0,0,0,0,1,0,0,3,0,1,0,0,0,0,1,0,0,0,0,1],
@@ -111,7 +111,7 @@ export class Game {
         this.player = null
         this.matrix = null
         this.onGameScoreChanged = onGameScoreChanged
-        this.#rawDataToMatrix(scenarios[Math.floor(Math.random() * scenarios.length)])
+        this.#rawDataToMatrix(scenarios[scenarioIndex])
     }
 
     getPlayerScore = () => {
