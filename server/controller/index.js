@@ -94,14 +94,15 @@ export class Controller {
     }
 
     #startGameTimer = () => {
-        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*5)
+        this.gameTimerId = setTimeout(this.onGameTimeout, 1000*300)
+        //this.emitEvent('timer', this.gameTimerId)
+        console.log(this.gameTimerId)
     }
 
     emitGameState = () => {
        this.emitEvent('gameState', this.game.getState())
        logEvent(
             'states',
-            //(this.game.getState().board))
             JSON.stringify(this.game.getState()))
         }
 
@@ -133,12 +134,12 @@ export class Controller {
             else if (keyCode === 32) {
                 this.game.interactWithDoorPressed()
             }
-            // Enter
-            else if (keyCode === 13) {
+            // 9 (instead of 13 - enter, as it was previously)
+            else if (keyCode === 57) {
                 this.game.discoverHiddenObject()
             }
-            // M
-            else if (keyCode === 77) {
+            // 0 (instead of 'm' as previously)
+            else if (keyCode === 48) {
                 this.game.moveObjectPressed()
             }
             this.emitGameState()
@@ -165,13 +166,8 @@ export class Controller {
 
     endGame = () => {
         this.emitEvent('gameEnded', {})
-        this.#sendMessageAsServer('please learner follow this link: https://forms.gle/dmoYD35xbhTHiiyD7', this.learner.id)
-        this.#sendMessageAsServer('please teacher follow this link: https://forms.gle/Wueor5rEaCWcxrhw5', this.teacher.id)
-     /*if(this.#getHandle(userId) == 'learner'){
-        this.#sendMessageAsServer('please '+ this.#getHandle(userId) +' follow this link: https://forms.gle/dmoYD35xbhTHiiyD7', userId)
-     } else if(this.#getHandle(userId) == 'teacher'){
-        this.#sendMessageAsServer('please '+ this.#getHandle(userId) +' follow this link: https://forms.gle/Wueor5rEaCWcxrhw5', userId)
-     }*/
+        this.#sendMessageAsServer('Congrats! You finished the game! Please learner got to this link to end: https://forms.gle/dmoYD35xbhTHiiyD7', this.learner.id)
+        this.#sendMessageAsServer('Congrats! You finished the game! Please teacher go to this link to end: https://forms.gle/Wueor5rEaCWcxrhw5', this.teacher.id)
     }
 
     onMenuCommand = (command, userId) => {
@@ -184,7 +180,7 @@ export class Controller {
             }
             this.gamesCounter = 0
             this.#sendMessageAsServer('A learner has joined the game')
-            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask "why" if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
+            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask and use the "Why" button if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
         }
         else if (command === 'joinAsObserver'
                 && this.teacher === null
