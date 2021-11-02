@@ -17,6 +17,16 @@ export const SCORE_STYLE = {
     width: 100,
     height: 70,
     font: FONT,
+    textColor: "black", /*change to white to see it*/
+    fill: "#111111"
+}
+
+export const TIME_STYLE = {
+    left: TOTAL_WIDTH - 300,
+    top: 40,
+    width: 100,
+    height: 70,
+    font: FONT,
     textColor: "white",
     fill: "#111111"
 }
@@ -44,6 +54,7 @@ export const OBJECT_STYLES = {
     // Empty
     0: {
         fill: '#111111'
+        //background-image: url("images/me.jpeg")
     },
 
     // Wall

@@ -1,4 +1,14 @@
 export const initChat = (sock) => {
+
+    // Query DOM
+    const message = document.getElementById('message'),
+    handle = document.getElementById('handle'),
+    form = document.getElementById('form'),
+    output = document.getElementById('output'),
+    prolificform = document.getElementById('prolificform'),
+    prolificid = document.getElementById('prolificid'),
+    feedback = document.getElementById('feedback');
+
     // Listen for events- front_end
     sock.on('chat', function(data) {
         feedback.innerText = '';
@@ -9,13 +19,6 @@ export const initChat = (sock) => {
     sock.on('typing', function(data) {
         feedback.innerHTML = '<p><em>' + 'your teammate' + ' is typing a message...</em></p>';
     });
-
-    // Query DOM
-    const message = document.getElementById('message'),
-    handle = document.getElementById('handle'),
-    form = document.getElementById('form'),
-    output = document.getElementById('output'),
-    feedback = document.getElementById('feedback');
 
 
     // Emit events
@@ -36,14 +39,38 @@ export const initChat = (sock) => {
     message.addEventListener('keypress', function() {
     sock.emit('typing', handle);
     })
+
+    prolificform.addEventListener('submit', function(e) {
+        e.preventDefault()
+        sock.emit('prolificid', {
+        prolificid: prolificid.value
+         });
+        prolificform.remove();
+    });
 }
 
-// const writeEvent = (text) => {
-//     //<ul> element
-//     const parent = document.querySelector('#events');
+const addButton = (id, label) => {
+            const buttonWrapper = document.getElementById('button-wrapper');
+            const button = document.createElement('button');
+            button.id = id
+            button.innerHTML = label
+            button.addEventListener('click', () => {
+                message.value = "" + " " + id;
+                });
+            buttonWrapper.appendChild(button)
+}
 
-//     //<li> element
-//     const el = document.createElement('li');
-//     el.innerHTML = text;
-//     parent.appendChild(el);
-// };
+export const populateButtons = (isLearner) => {
+    const buttonWrapper = document.getElementById('button-wrapper');
+    buttonWrapper.innerHTML = null
+    if(isLearner) {
+            [['why', 'Why']].forEach(([id, label]) => {
+             addButton(id,label)
+            });
+        }
+    else{
+         [['because', 'Because'], ['instead', 'Instead'], ['better', 'Better'], ['worse', 'Worse']].forEach(([id, label]) => {
+            addButton(id,label)
+        });
+    }
+}

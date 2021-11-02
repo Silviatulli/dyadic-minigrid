@@ -4,7 +4,8 @@ import {
 	CELL_STYLE,
 	BOARD_STYLE,
 	TITLE_SECTION_STYLE,
-	SCORE_STYLE
+	SCORE_STYLE,
+	TIME_STYLE
 } from './canvasStyles.js'
 
 
@@ -76,6 +77,17 @@ export class GameInterface {
 			SCORE_STYLE.top)
 	}
 
+    /*drawTime = (time) => {
+		console.log('drawTime', time)
+		const context = this.getContext()
+		context.fillStyle = TIME_STYLE.textColor
+		context.font = TIME_STYLE.font
+		context.fillText(
+			`Time: ${time}`,
+			TIME_STYLE.left,
+			TIME_STYLE.top)
+	}*/
+
 	drawBoard = () => {
 		const context = this.getContext()
 		context.fillStyle = BOARD_STYLE.fill
@@ -104,8 +116,15 @@ export class GameInterface {
 		this.initCanvas()
 		this.drawTopSection()
 		this.drawTitle()
+		//this.drawTime(matrix.time)
 		this.drawScore(matrix.score)
 		this.drawBoard()
 		this.fillBoard(matrix.board)
+	}
+
+	clearCanvas = () => {
+	    this.canvas.remove()
+	    this.canvas = null
+
 	}
 }

@@ -1,7 +1,7 @@
 import {
     GameInterface
 } from './gameInterface/index.js'
-import { initChat } from './chat/main.js'
+import { initChat, populateButtons } from './chat/main.js'
 
 
 const listenToKeyStrokes = (socket) => {
@@ -13,10 +13,12 @@ const listenToKeyStrokes = (socket) => {
 
 const onJoinAsPlayerClicked = (socket) => {
     socket.emit('onMenuCommand', 'joinAsPlayer')
+    populateButtons(true)
 }
 
 const onJoinAsObserverClicked = (socket) => {
     socket.emit('onMenuCommand', 'joinAsObserver')
+    populateButtons(false)
 }
 
 const onNewGameClicked = (socket) => {
@@ -44,6 +46,15 @@ const initSocket = () => {
         }
         gameInterface.render(gameState)
     })
+    socket.on('gameEnded', () => {
+        console.log('Received: gameEnded')
+        gameInterface.clearCanvas()
+    })
+
+    /*socket.on('timer', (time) => {
+        console.log('Received: timer', time)
+        gameInterface.render(time)
+    })*/
 
     return socket
 }

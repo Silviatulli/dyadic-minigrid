@@ -8,6 +8,7 @@ export class Controller {
     teacher = null
     gameTimerId = null
     gamesCounter = 0
+    totalScore = 0
 
     constructor(emitEvent) {
         this.emitEvent = emitEvent
@@ -46,6 +47,7 @@ export class Controller {
 
     onGameScoreChanged = (newScore) => {
         //this.#sendMessageAsServer(`New score: ${newScore}`)
+        this.totalScore = this.totalScore + newScore
         logEvent(
             'scores',
             parseInt(newScore))
@@ -166,8 +168,8 @@ export class Controller {
 
     endGame = () => {
         this.emitEvent('gameEnded', {})
-        this.#sendMessageAsServer('Congrats! You finished the game! Please learner got to this link to end: https://forms.gle/dmoYD35xbhTHiiyD7', this.learner.id)
-        this.#sendMessageAsServer('Congrats! You finished the game! Please teacher go to this link to end: https://forms.gle/Wueor5rEaCWcxrhw5', this.teacher.id)
+        this.#sendMessageAsServer('Congrats! You finished the game! You got ' + this.totalScore + ' points.\n Please learner got to this link to end: https://forms.gle/dmoYD35xbhTHiiyD7', this.learner.id)
+        this.#sendMessageAsServer('Congrats! You finished the game! You got ' + this.totalScore + ' points.\n Please teacher go to this link to end: https://forms.gle/Wueor5rEaCWcxrhw5', this.teacher.id)
     }
 
     onMenuCommand = (command, userId) => {
