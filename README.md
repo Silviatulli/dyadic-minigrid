@@ -13,6 +13,8 @@ multiplayer game and chat for collecting data on human counterfactual explanatio
 * make sure that the script type is "module" by adding <code>"type": "module"</code> (if the line "type" does not exist, add it after <code>"main": "server.js"</code>
 * set the start and dev scripts by adding <code>"start": "node server.js", "dev": "nodemon server.js"</code> before <code>"test"</code>
 
+## run the script
+* access the server folder and launch the script by typing <code>npm run dev</code>
 
 ## database setup
 * install mongodb using <code>npm install mongodb</code>
