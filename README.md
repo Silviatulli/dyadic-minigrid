@@ -10,7 +10,7 @@ multiplayer game and chat for collecting data on human counterfactual explanatio
 
 ## dependencies setup on package.json 
 * set the main script to <code>server.js</code> by modifying <code>"main": "server.js"</code>
-* make sure that the script type is "module" by adding <code>"type": "module"</code>
+* make sure that the script type is "module" by adding <code>"type": "module"</code> (if the line "type" does not exist, add it after <code>"main": "server.js"</code>
 * set the start and dev scripts by adding <code>"start": "node server.js", "dev": "nodemon server.js"</code> before <code>"test"</code>
 
 
