@@ -15,17 +15,17 @@ export class Controller {
     }
 
 
-    onChatMessage = (userId, message) => {
+    onChatMessage = (userId, message, room) => {
         console.log('onChatMessage', userId, message)
         const handle = this.#getHandle(userId)
         const event = {
             message: message,
-            handle: handle
+            handle: handle,
         }
         logEvent(
             'explanations',
             JSON.stringify(event))
-        this.sendMessage(event)
+        this.sendMessage(event,room)
     }
 
     #getHandle = (userId) => {
@@ -54,8 +54,8 @@ export class Controller {
     }
 
 
-    sendMessage = (message, to) => {
-        this.emitEvent('chat', message, to);
+    sendMessage = (message, room) => {
+        this.emitEvent('chat', message, room);
     }
 
     emitScore = () => {
@@ -64,14 +64,14 @@ export class Controller {
 
     }
 
-    newGame = () => {
+    newGame = (room) => {
         this.game = new Game({
             onGameScoreChanged: this.onGameScoreChanged,
             scenarioIndex: this.gamesCounter
         })
         this.gamesCounter++
         console.log(this.gamesCounter)
-        this.emitGameState()
+        this.emitGameState(room)
         this.#clearGameTimer()
         this.#startGameTimer()
     }
@@ -101,14 +101,14 @@ export class Controller {
         console.log(this.gameTimerId)
     }
 
-    emitGameState = () => {
-       this.emitEvent('gameState', this.game.getState())
+    emitGameState = (room) => {
+       this.emitEvent('gameState', this.game.getState(), room)
        logEvent(
             'states',
             JSON.stringify(this.game.getState()))
         }
 
-    onKeyStroke = (keyCode, userId) => {
+    onKeyStroke = (keyCode, userId, room) => {
         console.log('onKeyStroke', keyCode, userId)
         if (this.game !== null
             && userId === this.learner?.id) {
@@ -144,24 +144,24 @@ export class Controller {
             else if (keyCode === 48) {
                 this.game.moveObjectPressed()
             }
-            this.emitGameState()
+            this.emitGameState(room)
         }
     }
 
-    onNewGameCommand = () => {
+    onNewGameCommand = (room) => {
         let canStart = true
         if (this.learner === null) {
             canStart = false
-            this.#sendMessageAsServer('The game cannot start without a learner')
+            this.#sendMessageAsServer('The game cannot start without a learner', room)
         }
         if (this.teacher === null) {
             canStart = false
-            this.#sendMessageAsServer('The game cannot start without a teacher')
+            this.#sendMessageAsServer('The game cannot start without a teacher', room)
         }
         if (canStart) {
            if(this.gamesCounter<=2){
-                this.newGame()
-                this.#sendMessageAsServer('A new game has started!')
+                this.newGame(room)
+                this.#sendMessageAsServer('A new game has started!', room)
             }
            }
          }
@@ -172,28 +172,10 @@ export class Controller {
         this.#sendMessageAsServer('Congrats! You finished the game! You got ' + this.totalScore + ' points.\n Please teacher go to this link to end: https://forms.gle/Wueor5rEaCWcxrhw5', this.teacher.id)
     }
 
+    /*
     onMenuCommand = (command, userId) => {
         console.log('onMenuCommand', command, userId)
-        if (command === 'joinAsPlayer'
-            && this.learner === null
-            && this.teacher?.id !== userId) {
-            this.learner = {
-                id: userId,
-            }
-            this.gamesCounter = 0
-            this.#sendMessageAsServer('A learner has joined the game')
-            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask and use the "Why" button if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
-        }
-        else if (command === 'joinAsObserver'
-                && this.teacher === null
-                && this.learner?.id !== userId) {
-            this.teacher = {
-                id: userId
-            }
-            this.gamesCounter = 0
-            this.#sendMessageAsServer('A teacher has joined the game')
-            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Plan ahead to provide informative explanations on how to achieve the mission in the minimum number of steps. You can click on the words "because" "instead" "better" and "worse" to add them in your explanations and compare the outcomes of two possible actions in the game. Now it\'s time to play! Click on "New Game" and have fun! ', userId)
-        }
+        /*
         else if (command === 'newGame') {
             if(this.gamesCounter<=2){
                 this.onNewGameCommand()
@@ -203,6 +185,44 @@ export class Controller {
             }
         }
     }
+    */
+
+
+    onJoin = (userId, room, task) => {
+        console.log('onJoin', userId)
+
+        if (task == "learner") {
+        this.learner = {
+            id: userId,
+        }
+        this.gamesCounter = 0
+        this.#sendMessageAsServer('A learner has joined the game',room)
+        this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask and use the "Why" button if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
+        this.#sendMessageAsServer('Waiting for a teacher to start the game..',room)
+    }
+        else if (task == "teacher") {
+            this.teacher = {
+                id: userId
+        }
+            this.gamesCounter = 0
+            this.#sendMessageAsServer('A teacher has joined the game',room)
+            //this.#sendMessageAsServer('Waiting for a learn to start the game..',room)
+            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Plan ahead to provide informative explanations on how to achieve the mission in the minimum number of steps. You can click on the words "because" "instead" "better" and "worse" to add them in your explanations and compare the outcomes of two possible actions in the game. Now it\'s time to play! Click on "New Game" and have fun! ', userId)
+            this.onNewGameCommand(room)
+        }
+ 
+
+        }
+
+    onNewGame = (command, userId, room, task) => {
+        console.log('onNewGame', command, userId)
+
+            this.onNewGameCommand(room)
+
+        }
+    
+
+
 
     onUserDisconnected = (userId) => {
         if (this.learner?.id === userId) {

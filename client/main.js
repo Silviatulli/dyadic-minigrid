@@ -3,37 +3,55 @@ import {
 } from './gameInterface/index.js'
 import { initChat, populateButtons } from './chat/main.js'
 
+var room;
 
 const listenToKeyStrokes = (socket) => {
     document.addEventListener('keydown', (event) => {
         let code = event.keyCode;
-        socket.emit('onKeyStroke', code)
+
+        if(room){
+        socket.emit('onKeyStroke', {
+            room: room,
+            keyCode: code
+         })
+        }
+
       }, false);
 }
 
+/*
 const onJoinAsPlayerClicked = (socket) => {
     socket.emit('onMenuCommand', 'joinAsPlayer')
     populateButtons(true)
 }
+*/
 
 const onJoinAsObserverClicked = (socket) => {
-    socket.emit('onMenuCommand', 'joinAsObserver')
+    document.getElementById('button-join-as-observer').style.visibility='hidden';
+
+    socket.emit('onJoin')
     populateButtons(false)
 }
 
+/*
 const onNewGameClicked = (socket) => {
     console.log('newGameClicked')
-    socket.emit('onMenuCommand', 'newGame')
+    socket.emit('onNewGame', {
+        room: room,
+        command: 'newGame'})
+
+    //socket.emit('subscribe', 'roomOne');
 }
+*/
 
 
 const listenToGameMenuClicks = (socket) => {
-    const joinAsPlayerButton = document.getElementById('button-join-as-player')
-    joinAsPlayerButton.onclick = () => onJoinAsPlayerClicked(socket)
+    //const joinAsPlayerButton = document.getElementById('button-join-as-player')
+    //joinAsPlayerButton.onclick = () => onJoinAsPlayerClicked(socket)
     const joinAsObserverButton = document.getElementById('button-join-as-observer')
     joinAsObserverButton.onclick = () => onJoinAsObserverClicked(socket)
-    const newGameButton = document.getElementById('button-new-game')
-    newGameButton.onclick = () => onNewGameClicked(socket)
+    //const newGameButton = document.getElementById('button-new-game')
+    //newGameButton.onclick = () => onNewGameClicked(socket)
 }
 
 const initSocket = () => {
@@ -51,6 +69,16 @@ const initSocket = () => {
         gameInterface.clearCanvas()
     })
 
+    socket.on('game start', function(data) {
+        //$( "#connecting" ).remove();
+        //$( "#connected" ).text('Connected...');
+          room = data.room;
+
+          initChat(socket,room)
+
+          console.log(room);   
+      });
+
     /*socket.on('timer', (time) => {
         console.log('Received: timer', time)
         gameInterface.render(time)
@@ -60,6 +88,5 @@ const initSocket = () => {
 }
 
 const socket = initSocket()
-initChat(socket)
 listenToGameMenuClicks(socket)
 listenToKeyStrokes(socket)

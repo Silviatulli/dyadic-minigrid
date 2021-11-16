@@ -1,4 +1,7 @@
-export const initChat = (sock) => {
+
+export const initChat = (sock,room) => {
+
+    var room;
 
     // Query DOM
     const message = document.getElementById('message'),
@@ -24,7 +27,9 @@ export const initChat = (sock) => {
     // Emit events
     form.addEventListener('submit', function(e) {
         e.preventDefault()
+        console.log(room)
         sock.emit('chat', {
+            room : room,
             message: message.value
         });
         ['why','because', 'instead', 'better', 'worse'].forEach((id) => {
