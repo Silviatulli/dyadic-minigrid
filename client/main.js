@@ -9,12 +9,10 @@ const listenToKeyStrokes = (socket) => {
     document.addEventListener('keydown', (event) => {
         let code = event.keyCode;
 
-        if(room){
         socket.emit('onKeyStroke', {
             room: room,
             keyCode: code
          })
-        }
 
       }, false);
 }
@@ -75,6 +73,15 @@ const initSocket = () => {
           room = data.room;
 
           initChat(socket,room)
+
+          if(data.task == "learner"){
+            populateButtons(true)
+          }
+
+          else{
+            populateButtons(false)
+          }
+          
 
           console.log(room);   
       });

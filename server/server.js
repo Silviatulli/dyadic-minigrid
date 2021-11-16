@@ -49,7 +49,10 @@ const onKeyStroke = (keyCode, userId, room) => {
 
     var room_aux = String(room)
     var idx = room_aux.slice(4, 5)
-    controller[idx-1].onKeyStroke(keyCode, userId, room)
+
+    if(controller[idx-1]){
+        controller[idx-1].onKeyStroke(keyCode, userId, room)
+    }
 }
 
 /*
@@ -92,14 +95,14 @@ var findPeerForLoneSocket = function(socket) {
 */
 var player_count = 1;
 
-var sendRoomID = function(socket) {
+var sendRoomID = function(socket, task) {
 
         var room = "room" + Math.floor(player_count/2);
         console.log('Player Count', player_count);
         console.log('RoomID', room);
         socket.join(room);
         console.log('Socket', socket);
-        socket.emit('game start', {'room':room});
+        socket.emit('game start', {'room':room, 'task' : task });
 
   }
 
@@ -149,15 +152,17 @@ io.on('connection', (sock) => {
         if(!controller[idx-1])
             controller[idx-1] = new Controller(emitEvent);
 
-        sendRoomID(sock);
-
         var task;
 
 
-        if (player_count % 2 == 0)
-            task = "learner";
-        else
-            task = "teacher";
+            if (player_count % 2 == 0)
+                task = "learner";
+            else
+                task = "teacher";
+    
+
+        sendRoomID(sock, task);
+
 
         onJoin(sock.id, room, task)
     })
