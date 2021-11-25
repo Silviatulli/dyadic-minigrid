@@ -32,13 +32,13 @@ export const initChat = (sock,room) => {
             room : room,
             message: message.value
         });
+        form.reset();
         ['why','because', 'instead', 'better', 'worse'].forEach((id) => {
             const button = document.getElementById(id);
             button.addEventListener('click', () => {
                 message.value = "" + " " + id;
                 });
             });
-    form.reset();
     });
 
     message.addEventListener('keypress', function() {
