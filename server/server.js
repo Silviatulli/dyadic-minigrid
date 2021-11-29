@@ -102,7 +102,7 @@ var sendRoomID = function(socket, task) {
         console.log('RoomID', room);
         socket.join(room);
         console.log('Socket', socket);
-        socket.emit('game start', {'room':room, 'task' : task });
+        socket.emit('game start', {'room':room, 'task':task });
 
   }
 

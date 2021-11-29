@@ -45,12 +45,15 @@ export class Controller {
         }, to)
     }
 
-    onGameScoreChanged = (newScore) => {
+    onGameScoreChanged = (newScore, room) => {
         //this.#sendMessageAsServer(`New score: ${newScore}`)
         this.totalScore = this.totalScore + newScore
         logEvent(
             'scores',
             parseInt(newScore))
+        if(newScore >= 230){
+            this.newGame(room)
+        }
     }
 
 
@@ -63,6 +66,8 @@ export class Controller {
         console.log('game score is:', parseInt(this.game.getPlayerScore()))
 
     }
+
+
 
     newGame = (room) => {
         this.game = new Game({
@@ -78,7 +83,7 @@ export class Controller {
 
 
     onGameTimeout = () => {
-            this.#sendMessageAsServer('Timeout reached! The game is over.')
+            this.#sendMessageAsServer('The game is over!')
             if(this.gamesCounter <= 2){
             this.newGame()
             }
@@ -87,6 +92,7 @@ export class Controller {
             }
 
     }
+
 
     #clearGameTimer = () => {
         if (this.gameTimerId !== null) {
@@ -216,7 +222,6 @@ export class Controller {
 
     onNewGame = (command, userId, room, task) => {
         console.log('onNewGame', command, userId)
-
             this.onNewGameCommand(room)
 
         }
