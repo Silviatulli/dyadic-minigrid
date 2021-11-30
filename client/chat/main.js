@@ -12,6 +12,8 @@ export const initChat = (sock,room) => {
     prolificid = document.getElementById('prolificid'),
     feedback = document.getElementById('feedback');
 
+
+
     // Listen for events- front_end
     sock.on('chat', function(data) {
         feedback.innerText = '';
@@ -33,12 +35,23 @@ export const initChat = (sock,room) => {
             message: message.value
         });
         form.reset();
-        ['why','because', 'instead', 'better', 'worse'].forEach((id) => {
+
+        ['why', 'because', 'instead', 'better', 'worse'].forEach((id) => {
             const button = document.getElementById(id);
             button.addEventListener('click', () => {
                 message.value = "" + " " + id;
-                });
+                if(id=='why'){
+                console.log('entrato')
+                sock.emit('chat', {
+                    room : room,
+                    message: 'Why?'
+                    });
+                hide(document.getElementById('form'));
+                }
             });
+
+            });
+
     });
 
     message.addEventListener('keypress', function() {
@@ -60,7 +73,10 @@ const addButton = (id, label) => {
             const button = document.createElement('button');
             button.id = id
             button.innerHTML = label
-            button.addEventListener('click', (isLearner) => {
+            button.addEventListener('click', () => {
+                if(id=='why'){
+                    show(document.getElementById('form'));
+                }
                 message.value = "" + " " + id;
                 });
             buttonWrapper.appendChild(button)
@@ -74,7 +90,31 @@ const addImage = () => {
 }
 
 
+const hide = (elements) => {
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    elements[index].style.visibility = 'hidden';
+  }
+}
 
+const show = (elements, specifiedDisplay) => {
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    elements[index].style.visibility = specifiedDisplay || 'visible';
+  }
+}
+
+export const teacherinfo = (isLearner) => {
+    if(isLearner) {
+        console.log('no info', isLearner)
+        hide(document.getElementById('form'));
+        }
+    else{
+        console.log('teacher info', isLearner)
+        addImage()
+
+    }
+}
 export const populateButtons = (isLearner) => {
     const buttonWrapper = document.getElementById('button-wrapper');
     buttonWrapper.innerHTML = null
@@ -90,15 +130,6 @@ export const populateButtons = (isLearner) => {
     }
 }
 
-export const teacherinfo = (isLearner) => {
-    if(isLearner) {
-        console.log('no info', isLearner)
-        }
-    else{
-        console.log('teacher info', isLearner)
-        addImage()
 
-    }
-}
 
 
