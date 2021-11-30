@@ -11,14 +11,14 @@ export const TITLE_SECTION_STYLE = {
 	fill: "#111111"
 }
 
-export let SCORE_STYLE = {
+export const SCORE_STYLE = {
     left: TOTAL_WIDTH - 100,
     top: 40,
     width: 100,
     height: 70,
     font: FONT,
-    textColor: " ", /*change to white to see it*/
-    fill: "#111111"
+    textColor: 'transparent',
+     /*change to white to see it*/
 }
 
 export const TIME_STYLE = {
@@ -55,9 +55,7 @@ export const OBJECT_STYLES = {
 
     // Empty
     0: {
-        fill: '#111111',
-        font: FONT,
-        textColor: "white",
+        fill: '#111111'
     },
 
     // Wall
@@ -77,7 +75,7 @@ export const OBJECT_STYLES = {
 
     // Yellow objects
     4: {
-        fill: 'yellow'
+        fill: 'chocolate'
     },
 
     // Purple objects

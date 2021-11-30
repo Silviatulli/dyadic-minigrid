@@ -10,6 +10,7 @@ import {
 	SCORE_STYLE,
 	TIME_STYLE
 } from './gameInterface/canvasStyles.js'
+
 import { initChat, populateButtons, teacherinfo } from './chat/main.js'
 
 var room;
@@ -53,6 +54,7 @@ const onNewGameClicked = (socket) => {
 
 const showScore = () => {
           SCORE_STYLE.textColor = 'white';
+          SCORE_STYLE.font = '12px Source Sans Pro';
 }
 
 
@@ -78,7 +80,7 @@ const initSocket = () => {
     socket.on('gameEnded', () => {
         console.log('Received: gameEnded')
         gameInterface.clearCanvas()
-
+        teacherinfo(true)
     })
 
     socket.on('game start', function(data) {

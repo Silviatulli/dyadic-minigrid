@@ -64,11 +64,20 @@ export class GameInterface {
 		context.fillStyle = style.fill ? style.fill : CELL_STYLE.fill
 		context.fillStrokeStyle = style.stroke ? style.stroke : CELL_STYLE.stroke
 		context.fillRect(x, y, w, h)
-		if(key==6){
 		context.fillStyle = SCORE_STYLE.textColor
 		context.font = SCORE_STYLE.font
 		console.log('drawInfo', 'X')
+		if(key==6){
 		context.fillText('x', x+6, y+13)
+		}
+		if(key==3){
+		context.fillText('15', x, y+13)
+		}
+		if(key==4){
+		context.fillText('╛', x+5, y+13)
+		}
+		if(key==5){
+		context.fillText('-15', x, y+13)
 		}
 	}
 

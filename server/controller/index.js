@@ -51,7 +51,7 @@ export class Controller {
         logEvent(
             'scores',
             parseInt(newScore))
-        if(newScore >= 230){
+        if(newScore >= 90){
             this.newGame(room)
         }
     }

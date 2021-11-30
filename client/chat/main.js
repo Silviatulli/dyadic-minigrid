@@ -68,7 +68,7 @@ const addButton = (id, label) => {
 
 const addImage = () => {
             var img = document.createElement("img");
-            img.src = "./Commands.png";
+            img.src = "./Commands.jpg";
             var src = document.getElementById("info-wrapper");
             src.appendChild(img);
 }
