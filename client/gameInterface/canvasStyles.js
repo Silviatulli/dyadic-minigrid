@@ -17,7 +17,7 @@ export let SCORE_STYLE = {
     width: 100,
     height: 70,
     font: FONT,
-    textColor: "black", /*change to white to see it*/
+    textColor: " ", /*change to white to see it*/
     fill: "#111111"
 }
 
@@ -37,7 +37,7 @@ export const CANVAS_STYLE = {
     backgroundColor: "#111111"
 }
 
-export const CELL_STYLE = {
+export let CELL_STYLE = {
     width: 15,
     height: 15,
     stroke: '#444444'
@@ -49,12 +49,15 @@ export const BOARD_STYLE = {
     fill: '#444444'
 }
 
+
+
 export const OBJECT_STYLES = {
 
     // Empty
     0: {
-        fill: '#111111'
-        //background-image: url("images/me.jpeg")
+        fill: '#111111',
+        font: FONT,
+        textColor: "white",
     },
 
     // Wall
