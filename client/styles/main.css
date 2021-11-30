@@ -82,6 +82,12 @@ button:hover {
   justify-content: space-evenly;
 }
 
+.info-wrapper {
+  display: flex;
+  padding: 10px 50px;
+  justify-content: space-evenly;
+}
+
 
 h1 {
     text-align: left;

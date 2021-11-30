@@ -52,6 +52,7 @@ export const initChat = (sock,room) => {
          });
         prolificform.remove();
     });
+
 }
 
 const addButton = (id, label) => {
@@ -59,17 +60,24 @@ const addButton = (id, label) => {
             const button = document.createElement('button');
             button.id = id
             button.innerHTML = label
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (isLearner) => {
                 message.value = "" + " " + id;
                 });
             buttonWrapper.appendChild(button)
+}
+
+const addImage = () => {
+            var img = document.createElement("img");
+            img.src = "./teacherimage.jpeg";
+            var src = document.getElementById("info-wrapper");
+            src.appendChild(img);
 }
 
 export const populateButtons = (isLearner) => {
     const buttonWrapper = document.getElementById('button-wrapper');
     buttonWrapper.innerHTML = null
     if(isLearner) {
-            [['why', 'Why']].forEach(([id, label]) => {
+          [['why', 'Why']].forEach(([id, label]) => {
              addButton(id,label)
             });
         }
@@ -79,3 +87,15 @@ export const populateButtons = (isLearner) => {
         });
     }
 }
+
+export const teacherinfo = (isLearner) => {
+    if(isLearner) {
+        console.log('no info', isLearner)
+        }
+    else{
+        console.log('teacher info', isLearner)
+        addImage()
+    }
+}
+
+

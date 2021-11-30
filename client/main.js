@@ -1,7 +1,7 @@
 import {
     GameInterface
 } from './gameInterface/index.js'
-import { initChat, populateButtons } from './chat/main.js'
+import { initChat, populateButtons, teacherinfo } from './chat/main.js'
 
 var room;
 
@@ -65,6 +65,7 @@ const initSocket = () => {
     socket.on('gameEnded', () => {
         console.log('Received: gameEnded')
         gameInterface.clearCanvas()
+
     })
 
     socket.on('game start', function(data) {
@@ -76,19 +77,20 @@ const initSocket = () => {
 
           if(data.task == "learner"){
             populateButtons(true)
+            teacherinfo(true)
           }
 
           else{
             populateButtons(false)
+            teacherinfo(false)
           }
           
 
           console.log(room);   
       });
-
-    /*socket.on('timer', (time) => {
-        console.log('Received: timer', time)
-        gameInterface.render(time)
+/*
+       console.log('Received: timer', time)
+       gameInterface.render(time)
     })*/
 
     return socket
