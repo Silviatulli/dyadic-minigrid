@@ -12,7 +12,7 @@
 
     <div class="container">
     <div class="row">
-    <div class="col-lg-6">
+    <div class="col-6 col-md-4">
         <!-- Chat Window -->
         <div id="tiny-chat">
             <h2>Minigrid Chat</h2>
@@ -33,8 +33,14 @@
             </form>
         </div><!--tiny-chat-->
         <!-- Chat Window -->
+                <div id="tiny-chat">
+                <form id="prolificform" action="">
+                <input id="prolificid" autocomplete="off" placeholder="Prolific ID"  />
+                <button id="send">Send</button>
+                </form>
+        </div>
     </div><!--column-->
-    <div class="col-lg-6">
+    <div class="col-6 col-md-4">
         <!-- Game -->
     <div class="game-wrapper">
         <div class="game-menu">
@@ -51,19 +57,19 @@
         <div class="game-canvas-container" id="game-canvas-container">
             <!-- Game HTML gets injected here -->
         </div>
-        <div id="tiny-chat">
-                <form id="prolificform" action="">
-                <input id="prolificid" autocomplete="off" placeholder="Prolific ID"  />
-                <button id="send">Send</button>
-                </form>
-        </div>
-        <div id= "info-wrapper">
-        </div>
+
+
+
 
     </div>
+
     <!-- Game -->
 
     </div><!--column-->
+        <div class ="col-6 col-md-4">
+        <div id= "info-wrapper">
+        </div>
+        </div>
   </div> <!--row-->
 </div><!--container-->
     <script src="/socket.io/socket.io.js"></script>

@@ -1,6 +1,15 @@
 import {
     GameInterface
 } from './gameInterface/index.js'
+import {
+	CANVAS_STYLE,
+	OBJECT_STYLES,
+	CELL_STYLE,
+	BOARD_STYLE,
+	TITLE_SECTION_STYLE,
+	SCORE_STYLE,
+	TIME_STYLE
+} from './gameInterface/canvasStyles.js'
 import { initChat, populateButtons, teacherinfo } from './chat/main.js'
 
 var room;
@@ -41,6 +50,10 @@ const onNewGameClicked = (socket) => {
     //socket.emit('subscribe', 'roomOne');
 }
 */
+
+const showScore = () => {
+          SCORE_STYLE.textColor = 'white';
+}
 
 
 const listenToGameMenuClicks = (socket) => {
@@ -83,6 +96,7 @@ const initSocket = () => {
           else{
             populateButtons(false)
             teacherinfo(false)
+            showScore()
           }
           
 

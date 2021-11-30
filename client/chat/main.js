@@ -73,6 +73,8 @@ const addImage = () => {
             src.appendChild(img);
 }
 
+
+
 export const populateButtons = (isLearner) => {
     const buttonWrapper = document.getElementById('button-wrapper');
     buttonWrapper.innerHTML = null
@@ -95,6 +97,7 @@ export const teacherinfo = (isLearner) => {
     else{
         console.log('teacher info', isLearner)
         addImage()
+
     }
 }
 

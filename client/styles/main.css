@@ -103,7 +103,7 @@ h2 {
 }
 
 #tiny-chat {
-    max-width: 600px;
+    max-width: 450px;
     margin: 30px auto;
     border: 1px solid #ddd;
     border-radius: 0px;
@@ -155,10 +155,10 @@ input {
 .container {
 }
 
-.col-lg-6 {
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 50%;
+.col-6 {
+    -ms-flex: 0 0 33%;
+    flex: 0 0 33%;
+    max-width: 33%;
 }
 
 .row {

@@ -11,7 +11,7 @@ export const TITLE_SECTION_STYLE = {
 	fill: "#111111"
 }
 
-export const SCORE_STYLE = {
+export let SCORE_STYLE = {
     left: TOTAL_WIDTH - 100,
     top: 40,
     width: 100,
