@@ -67,7 +67,7 @@ export class GameInterface {
 		context.fillStyle = SCORE_STYLE.textColor
 		context.font = SCORE_STYLE.font
 		console.log('drawInfo', 'X')
-		if(key==6){
+		if(key==7){
 		context.fillText('x', x+6, y+13)
 		}
 		if(key==3){
