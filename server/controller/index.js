@@ -202,8 +202,9 @@ export class Controller {
             id: userId,
         }
         this.gamesCounter = 0
+
+        this.#sendMessageAsServer('You will play as a learner! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask and use the "Why" button if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
         this.#sendMessageAsServer('A learner has joined the game',room)
-        this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Follow the teacher\'s explanations and do not hesitate to ask and use the "Why" button if you need further information. Now it\'s time to play! Wait for the teacher to start a "New Game" and have fun!', userId)
         this.#sendMessageAsServer('Waiting for a teacher to start the game..',room)
     }
         else if (task == "teacher") {
@@ -211,9 +212,9 @@ export class Controller {
                 id: userId
         }
             this.gamesCounter = 0
-            this.#sendMessageAsServer('A teacher has joined the game',room)
             //this.#sendMessageAsServer('Waiting for a learn to start the game..',room)
-            this.#sendMessageAsServer('Welcome! Here are some additional tips for you. Plan ahead to provide informative explanations on how to achieve the mission in the minimum number of steps. You can click on the words "because" "instead" "better" and "worse" to add them in your explanations and compare the outcomes of two possible actions in the game. Now it\'s time to play! Click on "New Game" and have fun! ', userId)
+            this.#sendMessageAsServer('You will play as a teacher! Here are some additional tips for you. Plan ahead to provide informative explanations on how to achieve the mission in the minimum number of steps. You can click on the words "because" "instead" "better" and "worse" to add them in your explanations and compare the outcomes of two possible actions in the game. Now it\'s time to play! Click on "New Game" and have fun! ', userId)
+            this.#sendMessageAsServer('A teacher has joined the game',room)
             this.onNewGameCommand(room)
         }
  

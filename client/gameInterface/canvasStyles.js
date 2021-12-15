@@ -1,7 +1,10 @@
 const FONT = "20px Source Sans Pro"
 
-const TOTAL_WIDTH = 495
-const TOTAL_HEIGHT = 405
+//const TOTAL_WIDTH = 495
+//const TOTAL_HEIGHT = 405
+
+const TOTAL_WIDTH = 220
+const TOTAL_HEIGHT = 300
 
 export const TITLE_SECTION_STYLE = {
     width: TOTAL_WIDTH,
@@ -12,10 +15,11 @@ export const TITLE_SECTION_STYLE = {
 }
 
 export const SCORE_STYLE = {
-    left: TOTAL_WIDTH - 100,
+    //left: TOTAL_WIDTH - 100,
+    left: TOTAL_WIDTH - 50,
     top: 40,
     width: 100,
-    height: 70,
+    height: 100,
     font: FONT,
     textColor: 'transparent',
      /*change to white to see it*/
@@ -38,8 +42,8 @@ export const CANVAS_STYLE = {
 }
 
 export let CELL_STYLE = {
-    width: 15,
-    height: 15,
+    width: 20,
+    height: 20,
     stroke: '#444444'
 }
 

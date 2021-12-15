@@ -14,7 +14,7 @@ export class GameInterface {
 	canvas = null
 
 	constructor() {
-		this.cellSize = 15;
+		this.cellSize = 30;
 		this.padding = 1;
 	}
 
@@ -57,8 +57,8 @@ export class GameInterface {
 
 
 	drawCell = (x, y, key) => {
-		const w = 15
-		const h = 15
+		const w = 30
+		const h = 30
 		const context = this.getContext()
 		const style = OBJECT_STYLES[key]
 		context.fillStyle = style.fill ? style.fill : CELL_STYLE.fill
@@ -74,7 +74,7 @@ export class GameInterface {
 		context.fillText('15', x, y+13)
 		}
 		if(key==4){
-		context.fillText('╛', x+5, y+13)
+		context.fillText('╛ 10', x+5, y+13)
 		}
 		if(key==5){
 		context.fillText('-15', x, y+13)
@@ -88,7 +88,7 @@ export class GameInterface {
 		context.fillStyle = SCORE_STYLE.textColor
 		context.font = SCORE_STYLE.font
 		context.fillText(
-			`Score: ${score}`,
+			`${score}`,
 			SCORE_STYLE.left,
 			SCORE_STYLE.top)
 	}

@@ -107,7 +107,7 @@ const show = (elements, specifiedDisplay) => {
 export const teacherinfo = (isLearner) => {
     if(isLearner) {
         console.log('no info', isLearner)
-        hide(document.getElementById('form'));
+        //hide(document.getElementById('form'));
         }
     else{
         console.log('teacher info', isLearner)

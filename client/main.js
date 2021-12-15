@@ -54,7 +54,7 @@ const onNewGameClicked = (socket) => {
 
 const showScore = () => {
           SCORE_STYLE.textColor = 'white';
-          SCORE_STYLE.font = '12px Source Sans Pro';
+          SCORE_STYLE.font = '20px Source Sans Pro';
 }
 
 
