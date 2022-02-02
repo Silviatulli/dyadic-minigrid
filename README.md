@@ -15,6 +15,7 @@ multiplayer game and chat for collecting data on human counterfactual explanatio
 
 ## run the script
 * access the server folder and launch the script by typing <code>npm run dev</code>
+* the default project starts on http://localhost:3000/
 
 ## database setup
 * install mongodb using <code>npm install mongodb</code>
